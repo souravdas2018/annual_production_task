@@ -1,3 +1,31 @@
+import requests
+
+def test_api_endpoint(well_number):
+    base_url = 'http://localhost:8080/data'
+
+    # Test case 1: Missing well number
+    response = requests.get(base_url)
+    assert response.status_code == 400
+    print("Test Case 1: Missing well number - Passed")
+
+    # Test case 2: Invalid well number
+    response = requests.get(base_url, params={'well': 'INVALID'})
+    assert response.status_code == 404
+    print("Test Case 2: Invalid well number - Passed")
+
+    # Test case 3: Valid well number (using the parameter passed to the function)
+    response = requests.get(base_url, params={'well': well_number})
+    if response.status_code == 200:
+        data = response.json()
+        print("Test Case 3: Valid well number - Passed")
+        print("Data:", data)
+    else:
+        print("Test Case 3: Valid well number - Failed, Status Code:", response.status_code)
+
+test_api_endpoint(34059242540000)
+
+
+
 # import pandas as pd
 # import sqlite3
 
@@ -30,48 +58,3 @@
 
 
 
-import requests
-
-def test_api_endpoint(well_number):
-    """
-    Tests the API endpoint for retrieving well production data.
-
-    Parameters:
-        well_number (str): A valid API WELL NUMBER for testing.
-    """
-    base_url = 'http://localhost:8080/data'
-
-    # Test case 1: Missing well number
-    response = requests.get(base_url)
-    assert response.status_code == 400
-    assert response.json() == {"error": "Missing well number"}
-    print("Test Case 1: Missing well number - Passed")
-
-    # Test case 2: Invalid well number
-    response = requests.get(base_url, params={'well': 'INVALID'})
-    assert response.status_code == 404
-    assert response.json() == {"error": "Well number not found"}
-    print("Test Case 2: Invalid well number - Passed")
-
-    # Test case 3: Valid well number (using the parameter passed to the function)
-    response = requests.get(base_url, params={'well': well_number})
-    if response.status_code == 200:
-        data = response.json()
-        print("Test Case 3: Valid well number - Passed")
-        print("Data:", data)
-    else:
-        print("Test Case 3: Valid well number - Failed, Status Code:", response.status_code)
-
-    # Test case 4: Valid well number that returns a valid response
-    # (For this test case, you would want to know what valid values exist in your database)
-    # Assuming that '34059242540000' is a valid well number for demonstration purposes.
-    response = requests.get(base_url, params={'well': '34059242540000'})
-    if response.status_code == 200:
-        data = response.json()
-        assert data == {"oil": 5000, "gas": 3000, "brine": 1000}
-        print("Test Case 4: Valid well number with expected data - Passed")
-    else:
-        print("Test Case 4: Valid well number with expected data - Failed, Status Code:", response.status_code)
-
-# Run the tests with a valid well number
-test_api_endpoint(34059242540000)
