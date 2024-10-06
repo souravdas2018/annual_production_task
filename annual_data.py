@@ -13,7 +13,7 @@ def load_and_process_data(excel_file, db_file):
     - None
     """
     try:
-        #  Solution of Problem 1 Starts 
+        ##############  Solution of Problem 1 Starts #################
 
         # Load the Excel file into a DataFrame
         df = pd.read_excel(excel_file)
@@ -31,9 +31,9 @@ def load_and_process_data(excel_file, db_file):
 
         print("Annual data aggregated successfully.")
 
-        #  Solution of Problem 1 Ends 
+        ##################  Solution of Problem 1 Ends #################
 
-        #  Solution of Problem 2 Starts 
+        ##################  Solution of Problem 2 Starts #################
 
         # Connect to the SQLite database
         conn = sqlite3.connect(db_file)
@@ -49,7 +49,7 @@ def load_and_process_data(excel_file, db_file):
         conn.close()
         print("Database connection closed.")
 
-        #  Solution of Problem 2 Ends 
+        ##################  Solution of Problem 2 Ends #################
 
     except FileNotFoundError:
         print(f"Error: The file '{excel_file}' was not found.")
