@@ -1,15 +1,11 @@
 # annual_production_task
 annual_production_task
 
-#####################################################################################################
-
 2. Add up the quarterly data to calculate the annual data for  oil, gas, and brine for each well based on API WELL NUMBER. For example, API WELL NUMBER 34059242540000 has a quarter 1 production of 103, quarter 2 production of 166, quarter 3 production of 50, and quarter 4 production of 62, therefore it would have an annual oil production of 381 because 103 + 166 + 50 + 62 = 381.
 
 3. Using python, load the calculated annual data into a local sqlite database.
 
 ## The solution of these two problems are in the file named as "annual_data.py". You can just run the file by "python annual_data.py"
-
-#######################################################################################################
 
 4. Make an api using flask on port 8080 to allow for getting the annual data from the database using a GET request.
 
